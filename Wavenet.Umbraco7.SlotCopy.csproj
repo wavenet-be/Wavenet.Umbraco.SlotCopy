@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <Company>Wavenet</Company>
+    <Authors>Olivier Bossaer</Authors>
+    <Description>Simple helper to copy user content from one Azure Slot to another.</Description>
+    <Copyright>Wavenet ©</Copyright>
+    <PackageLicenseExpression>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/blob/master/LICENSE</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</PackageProjectUrl>
+    <PackageIconUrl>https://www.wavenet.be/favicon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</RepositoryUrl>
+    <PackageTags>Umbraco7 Azure Slot</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>P:\Wavenet\RD\Wavenet.Umbraco7.SlotCopy\Wavenet.Umbraco7.SlotCopy.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>P:\Wavenet\RD\Wavenet.Umbraco7.SlotCopy\Wavenet.Umbraco7.SlotCopy.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="stylecop.json" />
+    <None Remove="Wavenet.Umbraco7.SlotCopy.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="UmbracoCms.Core" Version="7.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
