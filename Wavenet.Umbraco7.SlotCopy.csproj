@@ -13,12 +13,8 @@
     <PackageTags>Umbraco7 Azure Slot</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>P:\Wavenet\RD\Wavenet.Umbraco7.SlotCopy\Wavenet.Umbraco7.SlotCopy.xml</DocumentationFile>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>P:\Wavenet\RD\Wavenet.Umbraco7.SlotCopy\Wavenet.Umbraco7.SlotCopy.xml</DocumentationFile>
+    <DocumentationFile>Wavenet.Umbraco7.SlotCopy.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
