@@ -6,7 +6,7 @@
     <Authors>Olivier Bossaer</Authors>
     <Description>Simple helper to copy user content from one Azure Slot to another.</Description>
     <Copyright>Wavenet ©</Copyright>
-    <PackageLicenseExpression>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/blob/master/LICENSE</PackageLicenseExpression>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</PackageProjectUrl>
     <PackageIconUrl>https://www.wavenet.be/favicon.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</RepositoryUrl>
