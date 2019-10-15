@@ -20,6 +20,7 @@ Sample:
 
 ### Azure Settings
 It's suggested that all settings are put on [Azure Configure app settings](https://docs.microsoft.com/en-us/azure/app-service/configure-common#configure-app-settings) as Slot Settings.
+
 | Key                                 | Value                                                             | Comment                     |
 | ----------------------------------- | ----------------------------------------------------------------- | --------------------------- |
 | UmbracoSlotCopy::ServerToSync       | https://your-production-website/umbraco/wavenet/slotcopy/getfiles | **Required** on Target Slot |
