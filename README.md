@@ -23,8 +23,8 @@ It's suggested that all settings are put on [Azure Configure app settings](https
 | Key                                 | Value                                                             | Comment                     |
 | ----------------------------------- | ----------------------------------------------------------------- | --------------------------- |
 | UmbracoSlotCopy::ServerToSync       | https://your-production-website/umbraco/wavenet/slotcopy/getfiles | **Required** on Target Slot |
-| UmbracoSlotCopy::PathsToSync        | ~/media,~/css,~/App_Data/UmbracoForms                             | _Optional_ on Source Slot   |
-| UmbracoSlotCopy::FilesToSyncPattern | \*.\*                                                               | _Optional_ on Source Slot   |
+| UmbracoSlotCopy::PathsToSync        | \~/media,\~/css,\~/App_Data/UmbracoForms                          | _Optional_ on Source Slot   |
+| UmbracoSlotCopy::FilesToSyncPattern | \*.\*                                                             | _Optional_ on Source Slot   |
 
 ### Synchronisation
 When everything is set up, you simply make a request on your staging slot: https://your-staging-website/umbraco/wavenet/slotcopy/sync
