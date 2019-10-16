@@ -22,6 +22,7 @@ namespace Wavenet.Umbraco7.SlotCopy
     using Umbraco.Core;
     using Umbraco.Web.Mvc;
     using Umbraco.Web.WebApi;
+
     using Wavenet.Umbraco7.SlotCopy.Helpers;
     using Wavenet.Umbraco7.SlotCopy.Models;
 
@@ -36,7 +37,9 @@ namespace Wavenet.Umbraco7.SlotCopy
         /// <summary>
         /// Downloads the requested file in the token.
         /// </summary>
-        /// <returns>The requested file.</returns>
+        /// <returns>
+        /// The requested file.
+        /// </returns>
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage Download()
@@ -93,58 +96,25 @@ namespace Wavenet.Umbraco7.SlotCopy
         }
 
         /// <summary>
-        /// Synchronizes files from target server.
+        /// Synchronises files from source server.
         /// </summary>
         /// <returns>
-        /// Number of item.
+        /// Synchronisation status.
         /// </returns>
         [HttpGet]
         [AllowAnonymous]
-        public int Sync()
+        public HttpResponseMessage Sync()
         {
             var webServiceUrl = Settings.ServerToSync;
             if (string.IsNullOrEmpty(webServiceUrl))
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
 
-            int updatedRessources = 0;
-            using (var client = new WebClient())
+            return new HttpResponseMessage
             {
-                client.Headers[HttpRequestHeader.Authorization] = $"Bearer {JwtHelper.GetAuthorizationToken()}";
-                client.Headers[HttpRequestHeader.Cookie] = "x-ms-routing-name=self";
-                var webServiceUri = new Uri(webServiceUrl);
-                var files = GetFileList(client, webServiceUri);
-                foreach (var file in files)
-                {
-                    string temp = null;
-                    try
-                    {
-                        var local = new FileInfo(HostingEnvironment.MapPath(file.Name));
-                        if (!local.Exists ||
-                            DateHelper.ToEpoch(local.LastWriteTimeUtc) != file.LastModified ||
-                            local.Length != file.Size)
-                        {
-                            temp = Path.GetTempFileName();
-                            local.Directory.Create();
-                            client.Headers[HttpRequestHeader.Authorization] = $"Bearer {JwtHelper.EncodeUrl(file.Name)}";
-                            client.DownloadFile(new Uri(webServiceUri, "Download?x-ms-routing-name=self"), temp);
-                            File.Copy(temp, local.FullName, true);
-                            local.LastWriteTimeUtc = DateHelper.FromEpoch(file.LastModified);
-                            updatedRessources++;
-                        }
-                    }
-                    finally
-                    {
-                        if (temp != null)
-                        {
-                            File.Delete(temp);
-                        }
-                    }
-                }
-
-                return updatedRessources;
-            }
+                Content = new PushStreamContent(this.ProcessSync, "text/plain"),
+            };
         }
 
         /// <summary>
@@ -157,5 +127,77 @@ namespace Wavenet.Umbraco7.SlotCopy
         /// </returns>
         private static IEnumerable<FileInfoViewModel> GetFileList(WebClient client, Uri webServiceUri)
             => JsonConvert.DeserializeObject<IEnumerable<FileInfoViewModel>>(Encoding.UTF8.GetString(client.DownloadData(webServiceUri + "?x-ms-routing-name=self")));
+
+        /// <summary>
+        /// Writes the <paramref name="line"/> on the specified <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="line">The line.</param>
+        private static void WriteLine(Stream stream, string line)
+        {
+            var buffer = Encoding.UTF8.GetBytes(line + Environment.NewLine);
+            stream.Write(buffer, 0, buffer.Length);
+            stream.Flush();
+        }
+
+        /// <summary>
+        /// Processes the synchronisation.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="transportContext">The transport context.</param>
+        private void ProcessSync(Stream stream, HttpContent content, TransportContext transportContext)
+        {
+            try
+            {
+                using (stream)
+                using (var client = new WebClient())
+                {
+                    // Ensure TLS 1.2 is enabled.
+                    ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls12;
+                    int updatedRessources = 0;
+
+                    client.Headers[HttpRequestHeader.Authorization] = $"Bearer {JwtHelper.GetAuthorizationToken()}";
+                    client.Headers[HttpRequestHeader.Cookie] = "x-ms-routing-name=self";
+                    var webServiceUri = new Uri(Settings.ServerToSync);
+                    var files = GetFileList(client, webServiceUri);
+                    WriteLine(stream, $"Files to sync: {files.Count()}");
+                    foreach (var file in files)
+                    {
+                        string temp = null;
+                        try
+                        {
+                            var local = new FileInfo(HostingEnvironment.MapPath(file.Name));
+                            if (!local.Exists ||
+                                DateHelper.ToEpoch(local.LastWriteTimeUtc) != file.LastModified ||
+                                local.Length != file.Size)
+                            {
+                                temp = Path.GetTempFileName();
+                                local.Directory.Create();
+                                client.Headers[HttpRequestHeader.Authorization] = $"Bearer {JwtHelper.EncodeUrl(file.Name)}";
+                                client.DownloadFile(new Uri(webServiceUri, "Download?x-ms-routing-name=self"), temp);
+                                File.SetLastWriteTimeUtc(temp, DateHelper.FromEpoch(file.LastModified));
+                                File.Copy(temp, local.FullName, true);
+                                updatedRessources++;
+                                WriteLine(stream, $"Sync: {file.Name}");
+                            }
+                        }
+                        finally
+                        {
+                            if (temp != null)
+                            {
+                                File.Delete(temp);
+                            }
+                        }
+                    }
+
+                    WriteLine(stream, $"Success - Updated: {updatedRessources} files.");
+                }
+            }
+            catch (Exception exception)
+            {
+                WriteLine(stream, $"Error: {exception}");
+            }
+        }
     }
 }

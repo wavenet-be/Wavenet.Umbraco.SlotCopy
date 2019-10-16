@@ -29,7 +29,7 @@ It's suggested that all settings are put on [Azure Configure app settings](https
 
 ### Synchronisation
 When everything is set up, you simply make a request on your staging slot: https://your-staging-website/umbraco/wavenet/slotcopy/sync
-and it will return the number of items copied from source to target.  
+and it will show the synchronisation progress.  
 If you run the same on production, it will reject the request with a 404 (check based on `UmbracoSlotCopy::ServerToSync`)
 
 ### Integration / Build Server

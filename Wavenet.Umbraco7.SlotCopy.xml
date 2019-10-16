@@ -15,7 +15,9 @@
             <summary>
             Downloads the requested file in the token.
             </summary>
-            <returns>The requested file.</returns>
+            <returns>
+            The requested file.
+            </returns>
         </member>
         <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext,System.Threading.CancellationToken)">
             <summary>
@@ -37,10 +39,10 @@
         </member>
         <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.Sync">
             <summary>
-            Synchronizes files from target server.
+            Synchronises files from target server.
             </summary>
             <returns>
-            Number of item.
+            Synchronisation status.
             </returns>
         </member>
         <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.GetFileList(System.Net.WebClient,System.Uri)">
@@ -52,6 +54,21 @@
             <returns>
             The file list.
             </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.WriteLine(System.IO.Stream,System.String)">
+            <summary>
+            Writes the <paramref name="line"/> on the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="line">The line.</param>
+        </member>
+        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.StreamSync(System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            Log synchronisation progress.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="content">The content.</param>
+            <param name="transportContext">The transport context.</param>
         </member>
         <member name="T:Wavenet.Umbraco7.SlotCopy.Helpers.Base64UrlEncoder">
             <summary>
