@@ -41,17 +41,12 @@ namespace Wavenet.Umbraco7.SlotCopy.Helpers
         private static readonly string Issuer = typeof(JwtHelper).Namespace;
 
         /// <summary>
-        /// The key.
-        /// </summary>
-        private static readonly byte[] Key = LoadKey();
-
-        /// <summary>
         /// Gets a value indicating whether this application has key.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this application has key; otherwise, <c>false</c>.
         /// </value>
-        public static bool HasKey => Key != null;
+        public static bool HasKey => Settings.ValidationKey != null;
 
         /// <summary>
         /// Decodes the URL.
@@ -108,7 +103,7 @@ namespace Wavenet.Umbraco7.SlotCopy.Helpers
         private static Token Decode(string token)
         {
             var parts = token?.Split('.') ?? new string[0];
-            using (var hash = new HMACSHA256(Key))
+            using (var hash = new HMACSHA256(Settings.ValidationKey))
             {
                 if (parts.Length != 3 || parts[0] != Header || Base64UrlEncoder.Encode(hash.ComputeHash(Encoding.Default.GetBytes($"{parts[0]}.{parts[1]}"))) != parts[2])
                 {
@@ -132,48 +127,15 @@ namespace Wavenet.Umbraco7.SlotCopy.Helpers
         /// <returns>The JWT Token.</returns>
         private static string GenerateToken(Token data)
         {
-            var payload = Base64UrlEncoder.Encode(JsonConvert.SerializeObject(
-                            data,
-                            Formatting.None));
-
+            var payload = Base64UrlEncoder.Encode(JsonConvert.SerializeObject(data, Formatting.None));
             var token = new StringBuilder($"{Header}.{payload}");
-            using (var hash = new HMACSHA256(Key))
+            using (var hash = new HMACSHA256(Settings.ValidationKey))
             {
                 var signature = Base64UrlEncoder.Encode(hash.ComputeHash(Encoding.Default.GetBytes(token.ToString())));
                 token.Append('.').Append(signature);
             }
 
             return token.ToString();
-        }
-
-        /// <summary>
-        /// Loads the key.
-        /// </summary>
-        /// <returns>
-        /// The key.
-        /// </returns>
-        private static byte[] LoadKey()
-        {
-            var configSection = (MachineKeySection)ConfigurationManager.GetSection("system.web/machineKey");
-            var validationKey = configSection.ValidationKey;
-            if (validationKey.Length % 2 != 0)
-            {
-                return null;
-            }
-
-            var result = new byte[validationKey.Length / 2];
-            for (int i = 0; i < result.Length; i++)
-            {
-                var byteValue = validationKey.Substring(i << 1, 2);
-                if (!byte.TryParse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var data))
-                {
-                    return null;
-                }
-
-                result[i] = data;
-            }
-
-            return result;
         }
 
         /// <summary>
