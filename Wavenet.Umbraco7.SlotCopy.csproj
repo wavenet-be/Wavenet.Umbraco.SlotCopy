@@ -11,7 +11,7 @@
     <PackageIconUrl>https://www.wavenet.be/favicon.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</RepositoryUrl>
     <PackageTags>Umbraco7 Azure Slot</PackageTags>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup>
