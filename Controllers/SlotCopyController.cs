@@ -1,4 +1,4 @@
-﻿// <copyright file="SlotCopyController.cs" company="Wavenet">
+// <copyright file="SlotCopyController.cs" company="Wavenet">
 // Copyright (c) Wavenet. All rights reserved.
 // </copyright>
 
@@ -122,7 +122,7 @@ namespace Wavenet.Umbraco7.SlotCopy.Controllers
 
             return new HttpResponseMessage
             {
-                Content = new PushStreamContent(this.ProcessSync, "text/plain"),
+                Content = new PushStreamContent((Action<Stream, HttpContent, TransportContext>)this.ProcessSync, "text/plain"),
             };
         }
 
