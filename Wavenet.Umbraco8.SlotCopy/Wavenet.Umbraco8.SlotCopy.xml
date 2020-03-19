@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Wavenet.Umbraco8.SlotCopy</name>
+    </assembly>
+    <members>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController">
+            <summary>
+              <see cref="T:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController" />.
+            </summary>
+            <seealso cref="T:Umbraco.Web.WebApi.UmbracoApiController" />
+            <seealso cref="T:Umbraco.Web.WebApi.UmbracoApiController" />
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.Download">
+            <summary>
+            Downloads the requested file in the token.
+            </summary>
+            <returns>
+            The requested file.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext,System.Threading.CancellationToken)">
+            <summary>
+            Executes asynchronously a single HTTP operation.
+            </summary>
+            <param name="controllerContext">The controller context for a single HTTP operation.</param>
+            <param name="cancellationToken">The cancellation token assigned for the HTTP operation.</param>
+            <returns>
+            The newly started task.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.GetFiles">
+            <summary>
+            Gets the files.
+            </summary>
+            <returns>
+            List of files to sync.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.Sync">
+            <summary>
+            Synchronises files from source server.
+            </summary>
+            <returns>
+            Synchronisation status.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.GetFileList(System.Net.WebClient,System.Uri)">
+            <summary>
+            Gets the file list.
+            </summary>
+            <param name="client">The client.</param>
+            <param name="webServiceUri">The web service URI.</param>
+            <returns>
+            The file list.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.WriteLine(System.IO.Stream,System.String)">
+            <summary>
+            Writes the <paramref name="line"/> on the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="line">The line.</param>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Controllers.SlotCopyController.ProcessSync(System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            Processes the synchronisation.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="content">The content.</param>
+            <param name="transportContext">The transport context.</param>
+        </member>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Helpers.Base64UrlEncoder">
+            <summary>
+            Base 64 URL Encoder/Decoder.
+            </summary>
+            <remarks>
+            Internal helper to avoid dependency.
+            </remarks>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.Base64UrlEncoder.Decode(System.String)">
+            <summary>
+            Decodes the specified data.
+            </summary>
+            <param name="data">The data.</param>
+            <returns>
+            The BASE64 URL decoded version.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.Base64UrlEncoder.DecodeString(System.String)">
+            <summary>
+            Decodes the specified data.
+            </summary>
+            <param name="data">The data.</param>
+            <returns>
+            The BASE64 URL decoded version.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.Base64UrlEncoder.Encode(System.String)">
+            <summary>
+            Encodes the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The BASE64 URL encoded version.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.Base64UrlEncoder.Encode(System.Byte[])">
+            <summary>
+            Encodes the specified input.
+            </summary>
+            <param name="input">The input.</param>
+            <returns>
+            The BASE64 URL encoded version.
+            </returns>
+        </member>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Helpers.DateHelper">
+            <summary>
+            Helper for date conversion between UTC and Epoch.
+            </summary>
+        </member>
+        <member name="F:Wavenet.Umbraco8.SlotCopy.Helpers.DateHelper.Epoch">
+            <summary>
+            The epoch date.
+            </summary>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.DateHelper.FromEpoch(System.Int64)">
+            <summary>
+            Converts the specified <paramref name="epochDate" /> to date.
+            </summary>
+            <param name="epochDate">The epoch date.</param>
+            <returns>
+            The date from the specified <paramref name="epochDate" />.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.DateHelper.ToEpoch(System.DateTime)">
+            <summary>
+            Converts the specified date to epoch.
+            </summary>
+            <param name="date">The date.</param>
+            <returns>
+            The epoch date.
+            </returns>
+        </member>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper">
+            <summary>
+            JWT helper to sign and validate requests.
+            </summary>
+            <remarks>
+            Internal helper to avoid dependency.
+            </remarks>
+        </member>
+        <member name="F:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Header">
+            <summary>
+            The header.
+            </summary>
+            <remarks>Equivalent to: {"alg": "HS256","typ": "JWT"}.</remarks>
+        </member>
+        <member name="F:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.MaxValidityInMinutes">
+            <summary>
+            The maximum validity in minutes.
+            </summary>
+        </member>
+        <member name="F:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Issuer">
+            <summary>
+            The issuer.
+            </summary>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.HasKey">
+            <summary>
+            Gets a value indicating whether this application has key.
+            </summary>
+            <value>
+              <c>true</c> if this application has key; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.DecodeUrl(System.String)">
+            <summary>
+            Decodes the URL.
+            </summary>
+            <param name="token">The token.</param>
+            <returns>
+            The decoded URL.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.EncodeUrl(System.String)">
+            <summary>
+            Encodes the request.
+            </summary>
+            <param name="url">The URL.</param>
+            <returns>
+            The JWT Token.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.GetAuthorizationToken">
+            <summary>
+            Gets the authorization token.
+            </summary>
+            <returns>The authorization token.</returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.IsAuthenticate(System.String)">
+            <summary>
+            Determines whether the specified token is authenticate.
+            </summary>
+            <param name="token">The token.</param>
+            <returns>
+              <c>true</c> if the specified token is authenticate; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Decode(System.String)">
+            <summary>
+            Decodes the specified token.
+            </summary>
+            <param name="token">The token.</param>
+            <returns>The decoded token; Or null if it's invalid.</returns>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.GenerateToken(Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Token)">
+            <summary>
+            Generates the token.
+            </summary>
+            <param name="data">The data.</param>
+            <returns>The JWT Token.</returns>
+        </member>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Token">
+            <summary>
+              <see cref="T:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Token" />.
+            </summary>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Token.Expiration">
+            <summary>
+            Gets or sets the expiration.
+            </summary>
+            <value>
+            The expiration.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Token.Issuer">
+            <summary>
+            Gets or sets the issuer.
+            </summary>
+            <value>
+            The issuer.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.JwtHelper.Token.Url">
+            <summary>
+            Gets or sets the URL.
+            </summary>
+            <value>
+            The URL.
+            </value>
+        </member>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Helpers.Settings">
+            <summary>
+            SlotCopy module <see cref="T:Wavenet.Umbraco8.SlotCopy.Helpers.Settings" />.
+            </summary>
+        </member>
+        <member name="F:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.ConfigurationRoot">
+            <summary>
+            The configuration root.
+            </summary>
+        </member>
+        <member name="F:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.LazyValidationKey">
+            <summary>
+            The validation key.
+            </summary>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.FilesToSyncPattern">
+            <summary>
+            Gets the files to synchronize pattern.
+            </summary>
+            <value>
+            The files to synchronize pattern.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.PathsToSync">
+            <summary>
+            Gets the paths to synchronize.
+            </summary>
+            <value>
+            The paths to synchronize.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.ServerToSync">
+            <summary>
+            Gets the server to synchronize.
+            </summary>
+            <value>
+            The server to synchronize.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.ValidationKey">
+            <summary>
+            Gets the validation key.
+            </summary>
+            <value>
+            The validation key.
+            </value>
+        </member>
+        <member name="M:Wavenet.Umbraco8.SlotCopy.Helpers.Settings.TryParseHex(System.String)">
+            <summary>
+            Tries the parse hexadecimal.
+            </summary>
+            <param name="validationKey">The validation key.</param>
+            <returns>The hexadecimal representation of <paramref name="validationKey"/>; - or - null if the key is not hexadecimal.</returns>
+        </member>
+        <member name="T:Wavenet.Umbraco8.SlotCopy.Models.FileInfoViewModel">
+            <summary>
+            The file info.
+            </summary>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Models.FileInfoViewModel.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
+            <value>
+            The last modified.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Models.FileInfoViewModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco8.SlotCopy.Models.FileInfoViewModel.Size">
+            <summary>
+            Gets or sets the size.
+            </summary>
+            <value>
+            The size.
+            </value>
+        </member>
+    </members>
+</doc>

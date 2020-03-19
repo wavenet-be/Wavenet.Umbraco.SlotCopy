@@ -2,7 +2,11 @@
 // Copyright (c) Wavenet. All rights reserved.
 // </copyright>
 
+#if UMB8
+namespace Wavenet.Umbraco8.SlotCopy.Models
+#else
 namespace Wavenet.Umbraco7.SlotCopy.Models
+#endif
 {
     using System.Runtime.Serialization;
 

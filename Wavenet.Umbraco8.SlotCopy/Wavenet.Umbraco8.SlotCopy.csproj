@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <Company>Wavenet</Company>
+    <Authors>Olivier Bossaer</Authors>
+    <Description>Simple helper to copy user content from one Azure Slot to another.</Description>
+    <Copyright>Wavenet ©</Copyright>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</PackageProjectUrl>
+    <PackageIconUrl>https://www.wavenet.be/favicon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/wavenet-be/Wavenet.Umbraco7.SlotCopy/</RepositoryUrl>
+    <PackageTags>Umbraco8 Azure Slot</PackageTags>
+    <Version>2.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>Wavenet.Umbraco8.SlotCopy.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>UMB8</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;UMB8</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Wavenet.Umbraco8.SlotCopy.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="UmbracoCms.Web" Version="[8,9)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Controllers\SlotCopyController.cs" Link="Controllers\SlotCopyController.cs" />
+    <Compile Include="..\Helpers\Base64UrlEncoder.cs" Link="Helpers\Base64UrlEncoder.cs" />
+    <Compile Include="..\Helpers\DateHelper.cs" Link="Helpers\DateHelper.cs" />
+    <Compile Include="..\Helpers\JwtHelper.cs" Link="Helpers\JwtHelper.cs" />
+    <Compile Include="..\Models\FileInfoViewModel.cs" Link="Models\FileInfoViewModel.cs" />
+    <Compile Include="..\Settings.cs" Link="Settings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
