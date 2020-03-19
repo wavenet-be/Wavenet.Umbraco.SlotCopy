@@ -2,7 +2,11 @@
 // Copyright (c) Wavenet. All rights reserved.
 // </copyright>
 
-namespace Wavenet.Umbraco7.SlotCopy
+#if UMB8
+namespace Wavenet.Umbraco8.SlotCopy.Controllers
+#else
+namespace Wavenet.Umbraco7.SlotCopy.Controllers
+#endif
 {
     using System;
     using System.Collections.Generic;
@@ -23,8 +27,13 @@ namespace Wavenet.Umbraco7.SlotCopy
     using Umbraco.Web.Mvc;
     using Umbraco.Web.WebApi;
 
+#if UMB8
+    using Wavenet.Umbraco8.SlotCopy.Helpers;
+    using Wavenet.Umbraco8.SlotCopy.Models;
+#else
     using Wavenet.Umbraco7.SlotCopy.Helpers;
     using Wavenet.Umbraco7.SlotCopy.Models;
+#endif
 
     /// <summary>
     ///   <see cref="SlotCopyController" />.

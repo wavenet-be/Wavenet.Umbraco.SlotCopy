@@ -2,19 +2,24 @@
 // Copyright (c) Wavenet. All rights reserved.
 // </copyright>
 
+#if UMB8
+namespace Wavenet.Umbraco8.SlotCopy.Helpers
+#else
 namespace Wavenet.Umbraco7.SlotCopy.Helpers
+#endif
 {
     using System;
-    using System.Configuration;
-    using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security.Cryptography;
     using System.Text;
-    using System.Web.Configuration;
 
     using Newtonsoft.Json;
 
+#if UMB8
+    using static Wavenet.Umbraco8.SlotCopy.Helpers.DateHelper;
+#else
     using static Wavenet.Umbraco7.SlotCopy.Helpers.DateHelper;
+#endif
 
     /// <summary>
     /// JWT helper to sign and validate requests.

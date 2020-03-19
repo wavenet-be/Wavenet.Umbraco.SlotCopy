@@ -4,14 +4,14 @@
         <name>Wavenet.Umbraco7.SlotCopy</name>
     </assembly>
     <members>
-        <member name="T:Wavenet.Umbraco7.SlotCopy.SlotCopyController">
+        <member name="T:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController">
             <summary>
-              <see cref="T:Wavenet.Umbraco7.SlotCopy.SlotCopyController" />.
+              <see cref="T:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController" />.
             </summary>
             <seealso cref="T:Umbraco.Web.WebApi.UmbracoApiController" />
             <seealso cref="T:Umbraco.Web.WebApi.UmbracoApiController" />
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.Download">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.Download">
             <summary>
             Downloads the requested file in the token.
             </summary>
@@ -19,7 +19,7 @@
             The requested file.
             </returns>
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext,System.Threading.CancellationToken)">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext,System.Threading.CancellationToken)">
             <summary>
             Executes asynchronously a single HTTP operation.
             </summary>
@@ -29,7 +29,7 @@
             The newly started task.
             </returns>
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.GetFiles">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.GetFiles">
             <summary>
             Gets the files.
             </summary>
@@ -37,7 +37,7 @@
             List of files to sync.
             </returns>
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.Sync">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.Sync">
             <summary>
             Synchronises files from source server.
             </summary>
@@ -45,7 +45,7 @@
             Synchronisation status.
             </returns>
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.GetFileList(System.Net.WebClient,System.Uri)">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.GetFileList(System.Net.WebClient,System.Uri)">
             <summary>
             Gets the file list.
             </summary>
@@ -55,14 +55,14 @@
             The file list.
             </returns>
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.WriteLine(System.IO.Stream,System.String)">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.WriteLine(System.IO.Stream,System.String)">
             <summary>
             Writes the <paramref name="line"/> on the specified <paramref name="stream"/>.
             </summary>
             <param name="stream">The stream.</param>
             <param name="line">The line.</param>
         </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.SlotCopyController.ProcessSync(System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Controllers.SlotCopyController.ProcessSync(System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
             <summary>
             Processes the synchronisation.
             </summary>
@@ -250,6 +250,60 @@
             The URL.
             </value>
         </member>
+        <member name="T:Wavenet.Umbraco7.SlotCopy.Helpers.Settings">
+            <summary>
+            SlotCopy module <see cref="T:Wavenet.Umbraco7.SlotCopy.Helpers.Settings" />.
+            </summary>
+        </member>
+        <member name="F:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.ConfigurationRoot">
+            <summary>
+            The configuration root.
+            </summary>
+        </member>
+        <member name="F:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.LazyValidationKey">
+            <summary>
+            The validation key.
+            </summary>
+        </member>
+        <member name="P:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.FilesToSyncPattern">
+            <summary>
+            Gets the files to synchronize pattern.
+            </summary>
+            <value>
+            The files to synchronize pattern.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.PathsToSync">
+            <summary>
+            Gets the paths to synchronize.
+            </summary>
+            <value>
+            The paths to synchronize.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.ServerToSync">
+            <summary>
+            Gets the server to synchronize.
+            </summary>
+            <value>
+            The server to synchronize.
+            </value>
+        </member>
+        <member name="P:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.ValidationKey">
+            <summary>
+            Gets the validation key.
+            </summary>
+            <value>
+            The validation key.
+            </value>
+        </member>
+        <member name="M:Wavenet.Umbraco7.SlotCopy.Helpers.Settings.TryParseHex(System.String)">
+            <summary>
+            Tries the parse hexadecimal.
+            </summary>
+            <param name="validationKey">The validation key.</param>
+            <returns>The hexadecimal representation of <paramref name="validationKey"/>; - or - null if the key is not hexadecimal.</returns>
+        </member>
         <member name="T:Wavenet.Umbraco7.SlotCopy.Models.FileInfoViewModel">
             <summary>
             The file info.
@@ -278,60 +332,6 @@
             <value>
             The size.
             </value>
-        </member>
-        <member name="T:Wavenet.Umbraco7.SlotCopy.Settings">
-            <summary>
-            SlotCopy module <see cref="T:Wavenet.Umbraco7.SlotCopy.Settings" />.
-            </summary>
-        </member>
-        <member name="F:Wavenet.Umbraco7.SlotCopy.Settings.ConfigurationRoot">
-            <summary>
-            The configuration root.
-            </summary>
-        </member>
-        <member name="F:Wavenet.Umbraco7.SlotCopy.Settings.LazyValidationKey">
-            <summary>
-            The validation key.
-            </summary>
-        </member>
-        <member name="P:Wavenet.Umbraco7.SlotCopy.Settings.FilesToSyncPattern">
-            <summary>
-            Gets the files to synchronize pattern.
-            </summary>
-            <value>
-            The files to synchronize pattern.
-            </value>
-        </member>
-        <member name="P:Wavenet.Umbraco7.SlotCopy.Settings.PathsToSync">
-            <summary>
-            Gets the paths to synchronize.
-            </summary>
-            <value>
-            The paths to synchronize.
-            </value>
-        </member>
-        <member name="P:Wavenet.Umbraco7.SlotCopy.Settings.ServerToSync">
-            <summary>
-            Gets the server to synchronize.
-            </summary>
-            <value>
-            The server to synchronize.
-            </value>
-        </member>
-        <member name="P:Wavenet.Umbraco7.SlotCopy.Settings.ValidationKey">
-            <summary>
-            Gets the validation key.
-            </summary>
-            <value>
-            The validation key.
-            </value>
-        </member>
-        <member name="M:Wavenet.Umbraco7.SlotCopy.Settings.TryParseHex(System.String)">
-            <summary>
-            Tries the parse hexadecimal.
-            </summary>
-            <param name="validationKey">The validation key.</param>
-            <returns>The hexadecimal representation of <paramref name="validationKey"/>; - or - null if the key is not hexadecimal.</returns>
         </member>
     </members>
 </doc>
